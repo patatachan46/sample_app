@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 },allow_nil: true
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -15,6 +15,7 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
 
   # ランダムなトークンを返す
   def User.new_token
@@ -38,3 +39,4 @@ class User < ApplicationRecord
       update_attribute(:remember_digest, nil)
     end
 end
+
